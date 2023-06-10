@@ -12,6 +12,7 @@ jobs:
       - name: Run and save results 
         run: |
           mkdir -p ./bandit_results
+          cp .reviewdog.yml ./bandit_results
           bandit -r ./ -o ./bandit_results/bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
         
       - uses: actions/upload-artifact@v3
