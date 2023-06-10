@@ -14,7 +14,7 @@ jobs:
           mkdir -p ./bandit_results
           bandit -r ./ -o bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
         
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: bandit_results
-          path: bandit_results/
+          path: ./bandit_results/
