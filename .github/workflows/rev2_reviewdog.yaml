@@ -4,7 +4,7 @@ name: Reviewdog_rev2
 # access to secrets
 on:
   workflow_run:
-    workflows: ["Scans"]
+    workflows: [Scans]
     types:
       - completed
 
