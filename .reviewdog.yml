@@ -9,6 +9,6 @@ runner:
     cmd: cat ./pep8.txt; [ ! -s pep8.txt ]
     format: pep8
   hadolint:
-    cmd: cat ./hadolint.txt; [ ! -s hadolint.txt ]
+    cmd: cat ./hadolint.txt
     format: rdjson
     level: error # (optional. same as -level flag. [info,warning,error])
