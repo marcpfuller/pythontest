@@ -18,7 +18,7 @@ jobs:
           cp .reviewdog.yml ./scan_results
           cp -r .git ./scan_results
           bandit -r ./ -o ./scan_results/bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
-          pep8 ./ > ./scan_results/pep8.txt
+          pep8 ./ > ./scan_results/pep8.txt || true
         
       - uses: actions/upload-artifact@v3
         with:
