@@ -5,6 +5,9 @@ runner:
       - "%f:%l:%c:%m" 
     name: bandit # (optional. you can overwrite <tool-name> defined by runner key)
     level: info # (optional. same as -level flag. [info,warning,error])
+  pep8:
+    cmd: cat ./pep8.txt
+    format: pep8
 #   hadolint:
 #     cmd: 'hadolint Dockerfile -f json | jq -f ".rdjson.jq" -c'
 #     format: rdjson

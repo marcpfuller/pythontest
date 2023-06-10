@@ -25,7 +25,7 @@ jobs:
                run_id: context.payload.workflow_run.id,
             });
             let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "bandit_results"
+              return artifact.name == "scan_results"
             })[0];
             let download = await github.rest.actions.downloadArtifact({
                owner: context.repo.owner,
@@ -34,10 +34,10 @@ jobs:
                archive_format: 'zip',
             });
             let fs = require('fs');
-            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/bandit_results.zip`, Buffer.from(download.data));
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/scan_results.zip`, Buffer.from(download.data));
 
       - name: 'Unzip artifact'
-        run: unzip bandit_results.zip
+        run: unzip scan_results.zip
     
       - name: Display structure of downloaded files
         run: ls -R
