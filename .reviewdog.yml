@@ -8,7 +8,7 @@ runner:
   pep8:
     cmd: cat ./pep8.txt; [ ! -s pep8.txt ]
     format: pep8
-#   hadolint:
-#     cmd: 'hadolint Dockerfile -f json | jq -f ".rdjson.jq" -c'
-#     format: rdjson
-#     level: error # (optional. same as -level flag. [info,warning,error])
+  hadolint:
+    cmd: cat ./hadolint.txt; [ ! -s hadolint.txt ]
+    format: rdjson
+    level: error # (optional. same as -level flag. [info,warning,error])
