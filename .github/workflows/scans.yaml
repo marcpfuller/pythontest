@@ -18,7 +18,7 @@ jobs:
         
       - uses: actions/upload-artifact@v3
         with:
-          name: bandit_results-${{ github.sha }}
+          name: bandit_results
           path: ./bandit_results/
   
   reviewdog:
@@ -31,7 +31,7 @@ jobs:
       - name: 'Download artifact'
         uses: actions/download-artifact@v3
         with:
-          name: bandit_results-${{ github.sha }}
+          name: bandit_results
     
       - name: Display structure of downloaded files
         run: ls -R && echo ${{github.workspace}}
