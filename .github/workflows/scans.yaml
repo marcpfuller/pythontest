@@ -37,5 +37,6 @@ jobs:
       - name: Run Reviewdog
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEWDOG_FAIL_ON_ERROR: 'true'
         run: |
           reviewdog -conf .reviewdog.yml -fail-on-error=$REVIEWDOG_FAIL_ON_ERROR -reporter=github-pr-check
