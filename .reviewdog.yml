@@ -1,0 +1,11 @@
+runner:
+  bandit:
+    cmd:  'cat ./bandit_results/bandit.txt' 
+    errorformat: # (optional if you use `format`)
+      - "%f:%l:%c:%m" 
+    name: bandit # (optional. you can overwrite <tool-name> defined by runner key)
+    level: info # (optional. same as -level flag. [info,warning,error])
+  hadolint:
+    cmd: 'hadolint Dockerfile -f json | jq -f ".rdjson.jq" -c'
+    format: rdjson
+    level: error # (optional. same as -level flag. [info,warning,error])
