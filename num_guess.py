@@ -20,7 +20,7 @@ while guesses_made < 6:
 
     guess = int(input("Take a guess: "))
 
-    guesses_made += 1
+     guesses_made += 1
 
     if guess < number:
         print("Your guess is too low.")
