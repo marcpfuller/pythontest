@@ -15,6 +15,9 @@ jobs:
       - name: install bandit
         run: |
           pip install bandit && bandit --version
+      - name: Install pep8
+        run: |
+          sudo apt install pep8
       - name: install hadolint
         run: |
           wget -q https://github.com/hadolint/hadolint/releases/download/$HADOLINT_VERSION/hadolint-Linux-x86_64 -O /tmp/hadolint \
