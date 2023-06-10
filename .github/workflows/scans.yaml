@@ -9,12 +9,40 @@ jobs:
       - name: Install bandit
         run: |
           pip install bandit
+      - name: Install pep8
+        run: |
+          sudo apt install pep8
       - name: Run and save results 
         run: |
-          mkdir -p ./bandit_results
-          bandit -r ./ -o bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
+          mkdir -p ./scan_results
+          cp .reviewdog.yml ./scan_results
+          cp -r .git ./scan_results
+          bandit -r ./ -o ./scan_results/bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
+          pep8 ./ > ./scan_results/pep8.txt
         
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
-          name: bandit_results
-          path: bandit_results/
+          name: scan_results
+          path: ./scan_results/
+  
+  reviewdog:
+    runs-on: ubuntu-latest
+    needs: bandit
+    steps:
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1.0.4
+        
+      - name: 'Download artifact'
+        uses: actions/download-artifact@v3
+        with:
+          name: scan_results
+    
+      - name: Display structure of downloaded files
+        run: ls -R && echo ${{github.workspace}}
+    
+      - name: Run Reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REVIEWDOG_FAIL_ON_ERROR: 'true'
+        run: |
+          reviewdog -conf .reviewdog.yml -fail-on-error=$REVIEWDOG_FAIL_ON_ERROR -reporter=github-pr-check
