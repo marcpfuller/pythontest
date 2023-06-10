@@ -32,7 +32,7 @@ jobs:
           name: bandit_results
     
       - name: Display structure of downloaded files
-        run: ls -R
+        run: ls -R && echo ${{github.workspace}}
     
       - name: Run Reviewdog
         env:
