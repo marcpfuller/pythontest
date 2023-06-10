@@ -13,6 +13,10 @@ jobs:
       - name: Install pep8
         run: |
           sudo apt install pep8
+      - name: install hadolint
+        run: |
+          wget -q https://github.com/hadolint/hadolint/releases/download/$HADOLINT_VERSION/hadolint-Linux-x86_64 -O /tmp/hadolint \
+          && chmod +x /tmp/hadolint
       - name: Run and save results 
         run: |
           mkdir -p ./scan_results
@@ -20,6 +24,7 @@ jobs:
           cp -r .git ./scan_results
           bandit -r ./ -o ./scan_results/bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
           pep8 ./ > ./scan_results/pep8.txt || true
+          /tmp/hadolint Dockerfile -f json | jq -f ".rdjson.jq" -c > ./scan_results/hadolint.txt
         
       - uses: actions/upload-artifact@v3
         with:
