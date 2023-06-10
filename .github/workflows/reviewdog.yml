@@ -1,0 +1,28 @@
+name: reviewdog
+on: [pull_request]
+env:
+  REVIEWDOG_FAIL_ON_ERROR: 'true'
+  HADOLINT_VERSION: v1.16.3
+jobs:
+  bandit:
+    name: runner / reviewdog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-setup@v1.0.4
+      # - name: Install jq
+      #   uses: dcarbone/install-jq-action@v1.0.1
+      - name: install bandit
+        run: |
+          pip install bandit && bandit --version
+      - name: install hadolint
+        run: |
+          wget -q https://github.com/hadolint/hadolint/releases/download/$HADOLINT_VERSION/hadolint-Linux-x86_64 -O /tmp/hadolint \
+          && chmod +x /tmp/hadolint
+      - name: Run Reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          /tmp/hadolint --version
+          reviewdog -conf .reviewdog.yml -fail-on-error=$REVIEWDOG_FAIL_ON_ERROR -reporter=github-pr-check
+      
