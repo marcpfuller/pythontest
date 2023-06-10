@@ -5,6 +5,8 @@ name: Reviewdog_rev2
 on:
   workflow_run:
     workflows: ["Scans"]
+    types:
+      - completed
 
 jobs:
   upload:
