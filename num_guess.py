@@ -13,14 +13,14 @@ guesses_made = 0
 
 name = input("Hello! What is your name?\n")
 
-number = random.randint(1, 23)
+number = random.randint(1, 21)
 print("Well, {0}, I am thinking of a number between 1 and 20.".format(name)) # E501 line too long (80 > 79 characters)
 
 while guesses_made < 6:
 
     guess = int(input("Take a guess: "))
 
-    guesses_made += 1
+     guesses_made += 1
 
     if guess < number:
         print("Your guess is too low.")
