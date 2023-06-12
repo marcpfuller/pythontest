@@ -12,3 +12,7 @@ runner:
     cmd: cat ./hadolint.txt
     format: rdjson
     level: error # (optional. same as -level flag. [info,warning,error])
+  shellcheck:
+    cmd: cat ./shellcheck.txt
+    format: "%f:%l:%c:%m %n" 
+    level: warning # (optional. same as -level flag. [info,warning,error])
