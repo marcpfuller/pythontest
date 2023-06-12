@@ -34,6 +34,7 @@ jobs:
           bandit -r ./ -o ./scan_results/bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
           pep8 ./ > ./scan_results/pep8.txt || true
           /tmp/hadolint Dockerfile -f json | jq -f ".rdjson.jq" -c > ./scan_results/hadolint.txt
+          shellcheck --version
           shellcheck -f gcc *.sh  > ./scan_results/shellcheck.txt || true
         
       - uses: actions/upload-artifact@v3
