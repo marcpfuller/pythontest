@@ -10,6 +10,13 @@ jobs:
       - name: Install bandit
         run: |
           pip install bandit
+      - name: install Go
+        uses: actions/setup-go@v3
+        with:
+         go-version: 1.20
+      - name: Install shellcheck
+        run: |
+          sudo apt install shellcheck
       - name: Install pep8
         run: |
           sudo apt install pep8
@@ -27,6 +34,7 @@ jobs:
           bandit -r ./ -o ./scan_results/bandit.txt --exit-zero -f custom --msg-template "{relpath}:{line}:{col}:{test_id}:{severity}:{msg}"
           pep8 ./ > ./scan_results/pep8.txt || true
           /tmp/hadolint Dockerfile -f json | jq -f ".rdjson.jq" -c > ./scan_results/hadolint.txt
+          shellcheck -S warning **/*.sh -f gcc > ./scan_results/shellcheck.txt || true
         
       - uses: actions/upload-artifact@v3
         with:
