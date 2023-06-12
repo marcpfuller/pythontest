@@ -35,7 +35,7 @@ jobs:
           pep8 ./ > ./scan_results/pep8.txt || true
           /tmp/hadolint Dockerfile -f json | jq -f ".rdjson.jq" -c > ./scan_results/hadolint.txt
           shellcheck --version
-          shellcheck -S warning **/*.sh -f gcc  > ./scan_results/shellcheck.txt || true
+          shellcheck -x **/*.sh -f gcc  > ./scan_results/shellcheck.txt || true
         
       - uses: actions/upload-artifact@v3
         with:
