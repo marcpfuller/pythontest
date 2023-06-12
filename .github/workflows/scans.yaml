@@ -3,6 +3,8 @@ on: [pull_request_target]
 jobs:
   scans:
     name: linting_scans
+    strategy:
+      fail-fast: false
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
