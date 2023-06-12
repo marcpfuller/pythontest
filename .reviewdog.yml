@@ -14,5 +14,6 @@ runner:
     level: error # (optional. same as -level flag. [info,warning,error])
   shellcheck:
     cmd: cat ./shellcheck.txt
-    errorformat: "%f:%l:%c:%m" 
+    errorformat: 
+      - "%f:%l:%c:%m" 
     level: warning # (optional. same as -level flag. [info,warning,error])
