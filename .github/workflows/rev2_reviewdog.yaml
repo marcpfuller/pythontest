@@ -2,11 +2,11 @@ name: Reviewdog_rev2
 
 # read-write repo token
 # access to secrets
-on:
-  workflow_run:
-    workflows: [Scans]
-    types:
-      - completed
+on: [ pull_request ]
+#   workflow_run:
+#     workflows: [Scans]
+#     types:
+#       - completed
 
 jobs:
   upload:
