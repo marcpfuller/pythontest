@@ -8,8 +8,8 @@ jobs:
     name: runner / reviewdog
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: reviewdog/action-setup@v1.0.4
+      - uses: actions/checkout@v4
+      - uses: reviewdog/action-setup@v1.3.0
       # - name: Install jq
       #   uses: dcarbone/install-jq-action@v1.0.1
       - name: install bandit and ruff
