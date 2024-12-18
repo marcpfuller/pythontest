@@ -8,8 +8,11 @@ runner:
   # # pep8:
   #   cmd: cat ./pep8.txt
   #   format: pep8
-  ruff:
+  ruff_format:
     cmd: ruff format  --diff
+    format: diff
+  ruff_check:
+    cmd: ruff check --diff
     format: diff
   # hadolint:
   #   cmd: cat ./hadolint.txt
