@@ -8,16 +8,16 @@ jobs:
     name: runner / reviewdog
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: reviewdog/action-setup@v1.0.4
+      - uses: actions/checkout@v4
+      - uses: reviewdog/action-setup@v1.3.0
       # - name: Install jq
       #   uses: dcarbone/install-jq-action@v1.0.1
-      - name: install bandit
+      - name: install bandit and ruff
         run: |
-          pip install bandit && bandit --version
-      - name: Install pep8
-        run: |
-          sudo apt install pep8
+          pip install bandit ruff && bandit --version && ruff --version
+      # - name: Install pep8
+      #   run: |
+      #     sudo apt install pep8 
       - name: install hadolint
         run: |
           wget -q https://github.com/hadolint/hadolint/releases/download/$HADOLINT_VERSION/hadolint-Linux-x86_64 -O /tmp/hadolint \
@@ -27,5 +27,5 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           /tmp/hadolint --version
-          reviewdog -conf .reviewdog.yml -fail-on-error=$REVIEWDOG_FAIL_ON_ERROR -reporter=github-pr-check
+          reviewdog -conf .reviewdog.yml -fail-on-error=$REVIEWDOG_FAIL_ON_ERROR -reporter=github-pr-review
       

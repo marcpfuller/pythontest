@@ -1,19 +1,25 @@
 runner:
-  bandit:
-    cmd:  cat ./bandit.txt
-    errorformat: # (optional if you use `format`)
-      - "%f:%l:%c:%m" 
-    name: bandit # (optional. you can overwrite <tool-name> defined by runner key)
-    level: info # (optional. same as -level flag. [info,warning,error])
-  pep8:
-    cmd: cat ./pep8.txt
-    format: pep8
-  hadolint:
-    cmd: cat ./hadolint.txt
-    format: rdjson
-    level: error # (optional. same as -level flag. [info,warning,error])
-  shellcheck:
-    cmd: cat ./shellcheck.txt
-    errorformat: 
-      - "%f:%l:%c:%m" 
+  # bandit:
+  #   cmd:  cat ./bandit.txt
+  #   errorformat: # (optional if you use `format`)
+  #     - "%f:%l:%c:%m" 
+  #   name: bandit # (optional. you can overwrite <tool-name> defined by runner key)
+  #   level: info # (optional. same as -level flag. [info,warning,error])
+  # # pep8:
+  #   cmd: cat ./pep8.txt
+  #   format: pep8
+  ruff_format:
+    cmd: ruff format  --diff
+    format: diff
+  ruff_check:
+    cmd: ruff check --diff
+    format: diff
+  # hadolint:
+  #   cmd: cat ./hadolint.txt
+  #   format: rdjson
+  #   level: error # (optional. same as -level flag. [info,warning,error])
+  # shellcheck:
+  #   cmd: cat ./shellcheck.txt
+  #   errorformat: 
+  #     - "%f:%l:%c:%m" 
 #     level: warning # (optional. same as -level flag. [info,warning,error])
