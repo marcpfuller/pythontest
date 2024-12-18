@@ -15,9 +15,9 @@ jobs:
       - name: install bandit and ruff
         run: |
           pip install bandit ruff && bandit --version && ruff --version
-      - name: Install pep8 and pip
-        run: |
-          sudo apt install pep8 
+      # - name: Install pep8
+      #   run: |
+      #     sudo apt install pep8 
       - name: install hadolint
         run: |
           wget -q https://github.com/hadolint/hadolint/releases/download/$HADOLINT_VERSION/hadolint-Linux-x86_64 -O /tmp/hadolint \
@@ -27,5 +27,5 @@ jobs:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           /tmp/hadolint --version
-          reviewdog -conf .reviewdog.yml -fail-on-error=$REVIEWDOG_FAIL_ON_ERROR -reporter=github-pr-check
+          reviewdog -conf .reviewdog.yml -fail-on-error=$REVIEWDOG_FAIL_ON_ERROR -reporter=github-pr-review
       
